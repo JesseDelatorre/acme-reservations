@@ -1,7 +1,7 @@
 const client = require('./client.js');
-const { createCustomer } = require('./customers.js');
-const { createRestaurant } = require('./restaurants.js');
-const { createReservation } = require('./reservations.js');
+const { createCustomer, getAllCustomers } = require('./customers.js');
+const { createRestaurant, getAllRestaurants } = require('./restaurants.js');
+const { createReservation, deleteReservations } = require('./reservations.js');
 
 const dropTables = async() => {
   try {
@@ -79,6 +79,10 @@ const syncAndSeed = async() => {
     await createReservation('2025-03-03', 3, sushiVillage.id, dora.id);
     console.log('reservation created');
      
+    const getCustomers = await getAllCustomers();
+    const getRestaurants = await getAllRestaurants();
+    const deletingReservation = await deleteReservations();
+    
     await client.end();
     console.log('connection D/C');
   }catch(err) {

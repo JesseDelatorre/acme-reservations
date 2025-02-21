@@ -13,7 +13,17 @@ const createRestaurant = async(restaurantName) => {
     console.log(err);
   }
 }
-
+const getAllRestaurants = async() => {
+  try{
+const { rows: retrievedRestaurants } = await client.query(`
+  SELECT * FROM  restaurants;
+  `);
+  return retrievedRestaurants;
+  }catch(err) {
+    console.log(err)
+  }
+}
 module.exports = {
-  createRestaurant
+  createRestaurant,
+  getAllRestaurants
 };
